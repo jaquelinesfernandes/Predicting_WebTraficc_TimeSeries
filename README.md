@@ -6,9 +6,9 @@ Este projeto utiliza **modelagem com XGBoost** para prever o volume de visitas d
 
 ## 🚀 Objetivos
 
-- Construir um pipeline de dados utilizando PySpark para manipulação e feature engineering de séries temporais.
+- Construir um pipeline de dados utilizando Python para manipulação e feature engineering de séries temporais.
 - Treinar um modelo de regressão com **XGBoost**, usando lags como preditores para capturar dependências temporais.
-- Prever o número de visitas mensais ao site para períodos futuros.
+- Prever o número de visitas diárias ao site para períodos futuros.
 
 ---
 
@@ -23,20 +23,27 @@ Este projeto utiliza **modelagem com XGBoost** para prever o volume de visitas d
 
 ## 🔍 Metodologia
 
+### 🛠️ Análise Exploratória do projeto
+  - Conversão do CSV em DataFrame final para pandas DataFrame.
+  - Análise de Distribuição dos Dados, Taxa Média de Conversão, Verificação da Relação de Dia e Campanhas com o número de visitas. 
+  - Análise de Correlação entre as variáveis.
+  - Teste de Estacionariedade e Médias Móveis.
+
 ### 🛠️ Pipeline do projeto
-- **PySpark:** 
-  - Leitura dos dados CSV e conversão em DataFrame Spark.
-  - Conversão da coluna `Date` para tipo data e ordenação.
+- **Preparação para modelagem:**
+  - Conversão do CSV em DataFrame final para pandas DataFrame.
   - Criação de variáveis de defasagem (lags de 1, 2 e 3 períodos).
   - Remoção de linhas com valores nulos gerados pelos lags.
-
-- **Preparação para modelagem:**
-  - Conversão do Spark DataFrame final para pandas DataFrame.
-  - Separação entre conjuntos de treino e previsão.
+  - Featuring Engineering para criação de variáveis para análise.
+  - Pre-processamento dos dados com sklearn ColumTransform.
+  - Separação entre conjuntos de treino e previsão com sklearn train_test_split.
 
 - **Modelagem com XGBoost:**
   - Treinamento do modelo `XGBRegressor` utilizando os lags como features.
   - Previsão do número de visitas para um horizonte futuro.
+  
+- **Avaliação da Modelagem Preditiva:**
+  - RMSE (mean_squared_error)
 
 - **Exportação do modelo:**
   - Serialização do modelo treinado com `joblib` para reutilização.
@@ -45,19 +52,22 @@ Este projeto utiliza **modelagem com XGBoost** para prever o volume de visitas d
 
 ## 📈 Resultados
 
-- Foram geradas previsões mensais do tráfego web para o horizonte desejado, demonstrando a capacidade do modelo de capturar a dinâmica temporal.
+- Foram geradas previsões diárias do tráfego web para o horizonte desejado, demonstrando a capacidade do modelo de capturar a dinâmica temporal.
 - O modelo e o pipeline permitem facilmente atualizar previsões com novos dados históricos.
+![alt text](image-2.png)
 ![alt text](image.png)
 ![alt text](image-1.png)
 ---
+## 📈 Considerações: 
+O modelo é capaz de capturar o comportamento do tráfego com um nível de erro que pode ser considerado adequado para previsões de curto prazo, mas abre espaço para melhorias, como inclusão de novas variáveis explicativas ou testes com abordagens híbridas (ex.: XGBoost + variáveis sazonais ou lags adicionais).
 
 ## 📚 Tecnologias e bibliotecas utilizadas
-
-- **PySpark**: para manipulação e engenharia de dados em larga escala.
 - **pandas & numpy**: apoio no tratamento final dos dados.
 - **XGBoost (XGBRegressor)**: algoritmo de boosting para regressão.
 - **joblib**: para salvar e carregar o modelo treinado.
-- **matplotlib**: visualizações simples do forecast.
+- **sklearn**: para métricas, pré-processamento(ColumnTransformer)
+- **stastmodels**: para teste estatístico adfuller
+- **matplotlib, pyplot e seaborn**: visualizações gráficas do forecast.
 
 ---
 
