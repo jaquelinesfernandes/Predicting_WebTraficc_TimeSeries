@@ -47,7 +47,8 @@ Este projeto utiliza **modelagem com XGBoost** para prever o volume de visitas d
 
 - Foram geradas previsões mensais do tráfego web para o horizonte desejado, demonstrando a capacidade do modelo de capturar a dinâmica temporal.
 - O modelo e o pipeline permitem facilmente atualizar previsões com novos dados históricos.
-
+![alt text](image.png)
+![alt text](image-1.png)
 ---
 
 ## 📚 Tecnologias e bibliotecas utilizadas
